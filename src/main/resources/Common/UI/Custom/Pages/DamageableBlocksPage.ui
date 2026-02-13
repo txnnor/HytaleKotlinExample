@@ -1,0 +1,47 @@
+$C = "../Common.ui";
+
+@AddButtonStyle = TextButtonStyle(
+  Default: (Background: #FFA017, LabelStyle: (FontSize: 16, TextColor: #ffffff, RenderBold: true, HorizontalAlignment: Center, VerticalAlignment: Center)),
+  Hovered: (Background: #F2AE49, LabelStyle: (FontSize: 16, TextColor: #ffffff, RenderBold: true, HorizontalAlignment: Center, VerticalAlignment: Center)),
+  Pressed: (Background: #DB8000, LabelStyle: (FontSize: 16, TextColor: #ffffff, RenderBold: true, HorizontalAlignment: Center, VerticalAlignment: Center))
+);
+
+Group {
+  Anchor: (Width: 500, Height: 260);
+  Background: #1B1B24;
+  LayoutMode: Top;
+  Padding: (Full: 20);
+
+  Label #Title {
+    Text: "Add Damageable Blocks";
+    Anchor: (Height: 40);
+    Style: (FontSize: 24, TextColor: #ffffff, HorizontalAlignment: Center);
+  }
+
+  Label #Subtitle {
+    Text: "Here you can add blocks that you want to be damageable!";
+    Anchor: (Height: 25);
+    Style: (FontSize: 14, TextColor: #888888, HorizontalAlignment: Center);
+  }
+
+  Group { Anchor: (Height: 10); }
+
+  Label #Prompt {
+    Text: "Block ID:";
+    Anchor: (Height: 25);
+    Style: (FontSize: 16, TextColor: #cccccc);
+  }
+
+  $C.@TextField #BlockInput {
+    Anchor: (Height: 40);
+    PlaceholderText: "Type your block ID here..";
+  }
+
+  Group { Anchor: (Height: 10); }
+
+  TextButton #AddButton {
+    Anchor: (Height: 45);
+    Text: "Add Block!";
+    Style: @AddButtonStyle;
+  }
+}

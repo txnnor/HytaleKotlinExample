@@ -12,10 +12,11 @@ import com.hypixel.hytale.server.core.inventory.ItemStack
 import com.hypixel.hytale.server.core.universe.PlayerRef
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore
 import com.hypixel.hytale.server.core.util.NotificationUtil
+import com.txnnor.example.ExamplePlugin
 import java.awt.Color
 
 
-class DamageBlockSystem : EntityEventSystem<EntityStore, DamageBlockEvent>(DamageBlockEvent::class.java) {
+class DamageBlockSystem(val plugin: ExamplePlugin) : EntityEventSystem<EntityStore, DamageBlockEvent>(DamageBlockEvent::class.java) {
     override fun handle(
         index: Int,
         archetypeChunk: ArchetypeChunk<EntityStore>,
@@ -25,16 +26,20 @@ class DamageBlockSystem : EntityEventSystem<EntityStore, DamageBlockEvent>(Damag
     ) {
         val ref = archetypeChunk.getReferenceTo(index)
         val playerRef = store.getComponent(ref, PlayerRef.getComponentType())!!
-        event.isCancelled = true
+        val blockId = event.blockType.id
+        val config = plugin.damageBlockConfig.get()
+
+        if (config.damageableBlocks.contains(blockId)) return
+
         val icon = ItemStack("Armor_Prisma_Head", 1).toPacket()
         NotificationUtil.sendNotification(
             playerRef.packetHandler,
-            Message.raw("Sorry, you can't break blocks!").color(Color.RED),
-            Message.raw("You don't have permissions to do this!").color(Color.LIGHT_GRAY),
+            Message.raw("Sorry, you can't do this!").color(Color.RED),
+            Message.raw("You don't have permission to damage these blocks!").color(Color.LIGHT_GRAY),
             icon,
             NotificationStyle.Warning
         )
-
+        event.isCancelled = true
     }
 
     override fun getQuery(): Query<EntityStore> {
