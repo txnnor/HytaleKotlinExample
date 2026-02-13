@@ -5,6 +5,7 @@ import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent
 import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent
 import com.hypixel.hytale.server.core.plugin.JavaPlugin
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit
+import com.txnnor.example.command.HelloCommand
 import com.txnnor.example.event.listeners.PlayerJoinListener
 import com.txnnor.example.event.systems.DamageBlockSystem
 
@@ -22,5 +23,8 @@ class ExamplePlugin(init: JavaPluginInit) : JavaPlugin(init) {
 
         // register event systems
         entityStoreRegistry.registerSystem(DamageBlockSystem())
+
+        //register commands
+        commandRegistry.registerCommand(HelloCommand())
     }
 }
