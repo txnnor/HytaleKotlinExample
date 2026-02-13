@@ -1,0 +1,10 @@
+{
+  "Group": "txnnor",
+  "Name": "KotlinExample",
+  "Version": "1.0.0",
+  "Description": "An example plugin for Hytale written in Kotlin.",
+  "Main": "com.txnnor.example.ExamplePlugin",
+  "Website": "https://github.com/txnnor",
+  "ServerVersion": "2026.02.11-255364b8e",
+  "IncludesAssetPack": true
+}
